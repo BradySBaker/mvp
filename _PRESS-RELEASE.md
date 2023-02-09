@@ -28,9 +28,7 @@ Once the project moves into development, the press release can be used as a touc
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
-  This book finder app will open readers minds to new books they've never heard of before. Sometimes its hard to find something you like and
-  the most popular recomendation's are just not cutting it. With just a simple click this app will provide you with multiple choices and and details
-  you need to find to help you with the decision on deciding if it'll be a good next read! Details such as the title, author, genre, short description and any other information the app can find. You can also save these books for a later look!
+  This book finder app will open readers minds to new "fiction" books they've never heard of before. Sometimes its hard to find something you like and the most popular recomendation's are just not cutting it. With just a simple click this app will provide you with multiple choices and details that you need to find to help you with the decision on deciding if it'll be a good next read! Details such as the title, author, short description and any other information the app can find. You can also save these books for a later look!
 
 ## Problem ##
   > Describe the problem your product solves.

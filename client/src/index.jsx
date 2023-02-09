@@ -6,9 +6,8 @@ import BookList from './components/bookList.jsx';
 
 const App = () => {
   const [books, setBooks] = useState([]);
-
   const update = (data) => {
-    console.log(data);
+    setBooks(data);
   }
 
   const fetch = () => {
@@ -27,7 +26,7 @@ const App = () => {
       <h1>Book Roulette</h1>
       <h3>To get started simply start clicking on the randomize button</h3>
       <Randomize fetch={fetch}/>
-      <BookList />
+      <BookList books={books}/>
     </div>
   );
 }
