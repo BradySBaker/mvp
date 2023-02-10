@@ -43,6 +43,9 @@ var randomizeSearch = () => {
 		randomPlot = bookPlots[getRandomIdx(bookPlots)];
 		query += `+${randomPlot}`;
 	}
+	var randomStartIndex = Math.floor(Math.random() * 101);
+
+	query += `&startIndex=${randomStartIndex}`
 
 	return query;
 }

@@ -44,7 +44,7 @@ Once the project moves into development, the press release can be used as a touc
   > A quote from a spokesperson in your company.
 
   "This idea of a random book finder popped into my head after recently having some issues finding a new title. There are so many
-  books out there these days and I'm hoping to provide readers with an alternative to a library, or any other book searching methods."
+  books out there these days and I'm hoping to provide readers with an alternative to a google search, or any other online searching methods. This app hopefully recreates that fealing of stumbling uppon a random book in the library"
 
 ## How to Get Started ##
   > Describe how easy it is to get started.

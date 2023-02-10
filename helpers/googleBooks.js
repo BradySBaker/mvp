@@ -1,5 +1,4 @@
 var axios = require('axios');
-var database = require('../database/index');
 var randomizeSearch = require('./randomizeSearch');
 var config = require('../config');
 /*
@@ -12,19 +11,29 @@ curl -X POST \
 */
 //https://www.googleapis.com/books/v1/volumes?q=search+terms
 
-var fetchBooks = (cb) => {
+//Fetches a certain ammount of books from google api
+var limitedRandomBookFetch = (cb, ammount = 4) => {
   var randomSearchQuery = randomizeSearch();
-  //Seperate into multiple querys!
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${randomSearchQuery}&maxResults=20&key=${config.TOKEN}`)
+  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${randomSearchQuery}&maxResults=${ammount}&printType=books&key=${config.TOKEN}`)
   .then((res) => {
     if (!res.data.items || res.data.items.length === 0) {
-      cb({err: 'No data found!'}, null);
+      cb({err: 'No data found!'}, randomSearchQuery);
+      console.log('no Data!');
       return;
     }
-    var booksAllInfo = res.data.items;
+    cb(null, res.data.items);
+    return;
+  })
+  .catch((err) => {
+    console.log('===========> Error in googleBooks.js!!!', err);
+    cb(err, randomSearchQuery);
+  });
+};
+
+var organizeBookData = (allBooksInfo) => {
     var booksInfo = [];
     //Seperate out needed info
-    booksAllInfo.forEach((curBookInfo) => {
+    allBooksInfo.forEach((curBookInfo) => {
       var bookInfo = {};
       bookInfo.title = curBookInfo.volumeInfo.title;
       bookInfo.authors = curBookInfo.volumeInfo.authors;
@@ -39,13 +48,35 @@ var fetchBooks = (cb) => {
       }
       booksInfo.push(bookInfo);
     });
-    cb(null, booksInfo);
-  })
-  .catch((err) => {
-    console.log('===========> Error in googleBooks.js!!!', err);
-    cb(err, null);
-  });
-
+    return booksInfo;
 };
 
-module.exports = fetchBooks;
+var getBooks = (cb) => {
+  let promises = [];
+  for (let i = 1; i <= 5; i++) {
+    var promise = new Promise((resolve, reject) => {
+      limitedRandomBookFetch((err, data) => {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          resolve(organizeBookData(data));
+        }
+      });
+    });
+    promises.push(promise);
+  }
+  Promise.all(promises)
+  .then((data) => {
+    var books = [];
+    data.forEach((curBookList) => {
+      books = books.concat(curBookList);
+    })
+    cb(null, books);
+  })
+  .catch((err) => {
+    cb(err, null);
+  })
+};
+
+module.exports = getBooks;

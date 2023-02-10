@@ -6,10 +6,13 @@ var DIST_DIR = path.join(__dirname, './client/dist');
 module.exports = {
   mode: 'development',
 
-  entry: `${SRC_DIR}/index.jsx`,
+  entry: {
+    index: `${SRC_DIR}/index.jsx`,
+    favorite: `${SRC_DIR}/favorite.jsx`
+  },
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name]bundle.js',
 
     path: DIST_DIR
   },
@@ -26,7 +29,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         }
-      }
+      },
+      {
+        test: /\.(jpe?g|gif|png|svg)$/i,
+        use: [
+        {
+          loader: 'url-loader',
+        }
+      ]
+    }
     ]
   }
 }
