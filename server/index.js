@@ -34,6 +34,18 @@ app.post('/favorite', (req, res) => {
   });
 });
 
+app.get('/favorite', (req, res) => {
+  bookHandler.fetchBooks((err, data) => {
+    if (err) {
+      res.statusCode = 404;
+      res.end();
+    } else {
+      res.statusCode = 200;
+      res.send(JSON.stringify(data));
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
 })

@@ -23,6 +23,9 @@ const BookList = (props) => {
       columns.push(<div key={id} className="column">{bookArr}</div>);
       bookArr = [];
     }
+    if (idx === props.books.length - 1 && bookArr.length !== 0) {
+      columns.push(<div key={id} className="column">{bookArr}</div>);
+    }
   });
   return (
     <div id="books">

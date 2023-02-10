@@ -11,6 +11,11 @@ const bookSchema = new mongoose.Schema({
 });
 
 const Book = mongoose.model('Book', bookSchema);
+
+// Book.deleteMany({}, () => {
+//   console.log('Cleared Database');
+// });
+
 let create = (book, cb) => {
   var newBook = new Book({
     title: book.title,
@@ -29,8 +34,8 @@ let create = (book, cb) => {
   });
 };
 
-let find = (bookTitle, cb) => {
-  Book.find({title: bookTitle}, (err, data) => {
+let find = (options, cb) => {
+  Book.find(options, (err, data) => {
     if (err) {
       cb(err, null);
     } else {

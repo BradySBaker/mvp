@@ -1,7 +1,7 @@
 database = require('../database/index');
 
 var saveBook = (book, cb) => {
-	database.find(book.title, (err, data) => {
+	database.find({title: book.title}, (err, data) => {
 		if (err) {
 			cb(err);
 		} else {
@@ -21,4 +21,15 @@ var saveBook = (book, cb) => {
 	});
 };
 
+var fetchBooks = (cb) => {
+	database.find({}, (err, data) => {
+		if (err) {
+			cb(err, null);
+		} else {
+			cb(null, data)
+		}
+	})
+}
+
 module.exports.saveBook = saveBook;
+module.exports.fetchBooks = fetchBooks;
