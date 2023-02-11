@@ -31,6 +31,7 @@ const App = () => {
     });
   }
 
+
   const saveBook = (bookInfo) => {
     $.ajax({
       type: 'POST',
