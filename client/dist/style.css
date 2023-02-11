@@ -1,0 +1,161 @@
+body {
+  background-color: brown;
+  font-family: "Lucida Console";
+}
+
+h1, h2, h3 {
+  text-align: center;
+}
+h3 {
+  color: lightgray;
+}
+
+#random-button {
+  display: grid;
+  margin: auto;
+  margin-top: 50px;
+  font-size: 50px;
+  border-radius: 10px;
+  background-color: rgb(228, 119, 119);
+  color: white;
+  box-shadow: 0px 0px 12px 12px rgb(0, 0, 0);
+  font-size: 40px;
+  padding: 10px 40px;
+}
+
+#random-button:hover {
+  background-color: rgb(88, 37, 37);
+}
+
+#nav-button {
+  background-color: rgb(0, 32, 211);
+  text-decoration: none;
+  padding: 5px 5px;
+  position: absolute;
+  color:rgb(255, 255, 255);
+  right: 5%;
+  top: 2%;
+}
+
+#nav-button:hover {
+  text-decoration: underline;
+}
+
+.column {
+  background-image: url('Bookshelves-Empty-Shelf.png');
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  gap: 4%;
+  grid-auto-flow: column;
+  margin-top: 0px;
+}
+#books {
+  position: absolute;
+  left: 0;
+  width:100%;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 30px;
+}
+
+.book-img {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: bold;
+  text-align: center;
+  width: 150px;
+  height: 250px;
+  box-shadow: 10px 10px 40px 12px rgb(0, 0, 0);
+}
+
+.book-img:hover {
+  box-shadow: 0px 0px 12px 12px rgb(255, 225, 0);;
+}
+.book-details {
+  pointer-events: none;
+  max-height: 600px;
+  max-width: 400px;
+  left: 40%;
+}
+
+.expanded-book-details {
+  left: 30%;
+  max-width: 600px;
+}
+
+ .book-details,.expanded-book-details {
+  background-image: url("bookDescBackground.png");
+  background-size: 100% 100%;
+  /*Padding: top, right, bottom, left not working*/
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: fixed;
+  border-radius: 50px;
+  top: 30%;
+  text-align: center;
+}
+
+.star {
+  display: inline;
+  margin-left: 40%;
+  font-size: 30px;
+}
+
+.star:hover {
+  cursor: pointer;
+  color: gold;
+}
+
+.expand-button {
+  position: absolute;
+  color:red;
+  transform: translate(100%, -1500%);
+}
+
+.descriptors {
+  color: blue;
+}
+
+#book-icon {
+  display: grid;
+  margin: auto;
+  width: 130px;
+  height: 110px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#loading {
+  position: absolute;
+  right: 5%;
+  top: 4%;
+  background-image: url('gearLoader.gif');
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.delete {
+  position: relative;
+  transform: translate(100px, -22px);
+  user-select: none;
+  color:white;
+  border-radius: 10px;
+}
+
+.delete:hover {
+  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+  border-radius: 10px;
+}
