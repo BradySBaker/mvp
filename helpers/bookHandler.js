@@ -31,5 +31,16 @@ var fetchBooks = (cb) => {
 	})
 }
 
+var deleteBook = (book, cb) => {
+	database.deleteBook(book.title, (err) => {
+		if (err) {
+			cb(err);
+		} else {
+			cb(null);
+		}
+	});
+}
+
 module.exports.saveBook = saveBook;
 module.exports.fetchBooks = fetchBooks;
+module.exports.deleteBook = deleteBook;

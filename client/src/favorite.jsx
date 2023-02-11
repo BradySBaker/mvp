@@ -7,6 +7,7 @@ var App = () => {
 	const [books, setBooks] = useState([]);
 
 	var update = (bookData) => {
+		console.log('updated');
 		setBooks(bookData);
 	}
 
@@ -20,6 +21,17 @@ var App = () => {
 		});
 	};
 
+	const deleteSaved = (book) => {
+		$.ajax({
+			type:'DELETE',
+			contentType: "application/json",
+			data: JSON.stringify(book),
+			url: '/favorite',
+			success: fetch,
+			error: () => {console.log('failed!')}
+		});
+  };
+
 	  //Run once on startup
 		useEffect(fetch, []);
 
@@ -29,7 +41,7 @@ var App = () => {
 		<a id='nav-button' href='/client'>View Home</a>
 		<h3>Find all your saved reads here... Page empty? Do some randomized searches and click on the star to store them here!</h3>
 		<h2>Saved Reads</h2>
-		<BookList books={books}/>
+		<BookList deleteSaved={deleteSaved} books={books} favorite={true}/>
 	</div>
 	)
 }

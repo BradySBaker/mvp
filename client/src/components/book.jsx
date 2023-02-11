@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 // var bookDescBackground = require('./bookDescBackground.png');
 
 const Book = (props) => {
-  var bookImage = <img className='book-img' src={props.book['img-url']}></img>;
-  if (!props.book['img-url']) {
-    bookImage = <div className='book-img'>Title: {props.book.title}</div>;
+  var starStartStyle = {}
+  var deleteStyle = {'visibility': 'hidden'};
+  if (props.favorite) {
+    starStartStyle = {'visibility': 'hidden'};
+    deleteStyle = {'visibility': 'visible'};
   }
 
   const [bookDetails, setBookDetails] = useState(<div></div>);
+  const [starStyle, setStarStyle] = useState(starStartStyle);
 
   //Deal with author rendering
   var authors = 'No author info';
@@ -31,16 +34,20 @@ const Book = (props) => {
     });
   }
 
+  var setStarColor = () => {
+    setStarStyle({'color': 'gold'});
+  }
+
   var expandDetails = () => {
     var bookDesc = props.book.description;
     setBookDetails(
       <div className='expanded-book-details'>
         <ul>
-        <li><u>Title</u></li>
+        <li className='descriptors'><u>Title</u></li>
         <div>{props.book.title}</div>
-        <li><u>Author</u></li>
+        <li className='descriptors'><u>Author</u></li>
         <div>{authorsExpanded}</div>
-        <li><u>Description</u></li>
+        <li className='descriptors'><u>Description</u></li>
         <div>{bookDesc}</div>
         </ul>
       </div>
@@ -56,19 +63,19 @@ const Book = (props) => {
     var expandButton = <div></div>
     if (bookDesc && bookDesc.length > 500) {
       bookDesc = props.book.description.slice(0, 500) + '...';
-      expandButton = <button className='expand-button' onClick={expandDetails}>Expand</button>
+      expandButton = <button className='expand-button' onClick={expandDetails} onMouseEnter={showDetails} onMouseLeave={hideDetails}>Expand</button>
     } else if (props.book.authors && props.book.authors.length > 5) {
-      expandButton = <button className='expand-button' onClick={expandDetails}>Expand</button>
+      expandButton = <button className='expand-button' onMouseEnter={showDetails} onMouseLeave={hideDetails} onClick={expandDetails}>Expand</button>
     }
 
     setBookDetails(
     [<div className='book-details'>
       <ul>
-      <li><u>Title</u></li>
+      <li className='descriptors'><u>Title</u></li>
         <div>{props.book.title}</div>
-        <li><u>Author</u></li>
+        <li className='descriptors'><u>Author</u></li>
         <div>{authors}</div>
-        <li><u>Description</u></li>
+        <li className='descriptors'><u>Description</u></li>
         <div>{bookDesc}</div>
       </ul>
     </div>,
@@ -81,11 +88,17 @@ const Book = (props) => {
     setBookDetails(<div></div>);
   };
 
+  var bookImage = <img className='book-img' src={props.book['img-url']} onMouseEnter={showDetails} onMouseLeave={hideDetails}></img>;
+  if (!props.book['img-url']) {
+    bookImage = <div className='book-img' onMouseEnter={showDetails} onMouseLeave={hideDetails}>Title: {props.book.title}</div>;
+  }
+
   return (
-    <div className="book" onMouseEnter={showDetails} onMouseLeave={hideDetails}>
+    <div className="book">
       {bookImage}
       <a href={props.book['buy-url']} target="_blank">Purchase</a>
-      <div className='star' onClick={() => {props.saveBook(props.book)}}>&#9733;</div>
+      <div className='star' style={starStyle} onClick={() => {props.saveBook(props.book); setStarColor()}}>&#9733;</div>
+      <div className='delete' style={deleteStyle} onClick={() => {props.deleteSaved(props.book)}}>delete</div>
       {bookDetails}
     </div>
   )

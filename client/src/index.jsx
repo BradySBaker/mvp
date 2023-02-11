@@ -4,12 +4,24 @@ import $ from 'jquery';
 import BookList from './components/bookList.jsx';
 
 const App = () => {
+  const [bookIconStyle, setBookIconStyle] = useState({'backgroundImage': 'url("closed-book.png")'});
   const [books, setBooks] = useState([]);
+  const [loadIconStyle, setLoadIconStyle] = useState({'visibility': 'hidden'});
   const update = (data) => {
+    setLoadIconStyle({'visibility': 'hidden'});
     setBooks(data);
   }
 
+  const toggleBookIcon = (open) => {
+    if (open) {
+      setBookIconStyle({'backgroundImage': 'url("open-book.png")'});
+    } else {
+      setBookIconStyle({'backgroundImage': 'url("closed-book.png")'})
+    }
+  }
+
   const fetch = () => {
+    setLoadIconStyle({'visibility': 'visible'})
     $.ajax({
       type: 'GET',
       url: '/fetch',
@@ -34,8 +46,10 @@ const App = () => {
     <div>
       <h1>Book Roulette</h1>
       <a id='nav-button' href='/client/favorite.html'>View Saved</a>
-      <h3>To get started simply click on the randomize button</h3>
-      <button id='random-button' onClick={fetch}>Randomize!</button>
+      <div id='loading' style={loadIconStyle}></div>
+      <h3>To get started simply click on the discover button</h3>
+      <div id='book-icon' style={bookIconStyle}></div>
+      <button id='random-button' onClick={fetch} onMouseEnter={() => toggleBookIcon(true)} onMouseLeave = {() => toggleBookIcon(false)}>DISCOVER</button>
       <BookList books={books} saveBook={saveBook}/>
     </div>
   );

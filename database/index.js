@@ -12,9 +12,6 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model('Book', bookSchema);
 
-// Book.deleteMany({}, () => {
-//   console.log('Cleared Database');
-// });
 
 let create = (book, cb) => {
   var newBook = new Book({
@@ -44,5 +41,16 @@ let find = (options, cb) => {
   })
 };
 
+let deleteBook = (bookTitle, cb) => {
+  Book.deleteOne({title: bookTitle}, (err) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null);
+    }
+  })
+}
+
 module.exports.create = create;
 module.exports.find = find;
+module.exports.deleteBook = deleteBook;

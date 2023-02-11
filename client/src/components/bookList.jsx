@@ -18,7 +18,7 @@ const BookList = (props) => {
   var bookArr = [];
   props.books.forEach((curBook, idx) => {
     id++;
-    bookArr.push(<Book key={id} book={curBook} saveBook={props.saveBook}/>);
+    bookArr.push(<Book key={id} deleteSaved={props.deleteSaved} favorite={props.favorite} book={curBook} saveBook={props.saveBook}/>);
     if ((idx+1) % 4 === 0) {
       columns.push(<div key={id} className="column">{bookArr}</div>);
       bookArr = [];

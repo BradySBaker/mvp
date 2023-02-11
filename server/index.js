@@ -44,7 +44,19 @@ app.get('/favorite', (req, res) => {
       res.send(JSON.stringify(data));
     }
   })
-})
+});
+
+app.delete('/favorite' ,(req, res) => {
+  bookHandler.deleteBook(req.body, (err) => {
+    if (err) {
+      res.statusCode = 404;
+      res.end();
+    } else {
+      res.statusCode = 204;
+      res.send(JSON.stringify(req.body));
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
