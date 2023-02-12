@@ -1,17 +1,6 @@
 import React from 'react';
 import Book from './book.jsx';
 
-/*
-{
-      props.books.map((curBook) => {
-        id++;
-        return <Book key={id} book={curBook}/>
-      })
-      }
- */
-
-//<div><div><div/></div>
-///home/bsbaker/hackreactor/rpp2210-mvp/client/src/components/no-image.png
 const BookList = (props) => {
   var id = 0;
   var columns = [];

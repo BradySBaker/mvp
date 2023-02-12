@@ -63,7 +63,7 @@ h3 {
   border-radius: 30px;
 }
 
-.book-img {
+.book-img, .missing-img {
   margin-top: 20px;
   margin-left: 20px;
   font-weight: bold;
@@ -73,8 +73,8 @@ h3 {
   box-shadow: 10px 10px 40px 12px rgb(0, 0, 0);
 }
 
-.book-img:hover {
-  box-shadow: 0px 0px 12px 12px rgb(255, 225, 0);;
+.book-img:hover, .missing-img:hover {
+  box-shadow: 0px 0px 12px 12px rgb(255, 225, 0);
 }
 .book-details {
   pointer-events: none;
@@ -105,8 +105,9 @@ h3 {
 }
 
 .star {
+  user-select: none;
   display: inline;
-  margin-left: 40%;
+  margin-left: 30%;
   font-size: 30px;
 }
 
@@ -158,4 +159,9 @@ h3 {
   color: red;
   text-decoration: underline;
   border-radius: 10px;
+}
+
+.missing-img {
+  margin-right: 70px;
+  font-weight: bold;
 }

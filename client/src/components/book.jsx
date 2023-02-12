@@ -16,6 +16,7 @@ const Book = (props) => {
   var authors = 'No author info';
   var authorsExpanded = 'No author info';
   if (props.book.authors) {
+    authorsExpanded = '';
     authors = ''
     props.book.authors.forEach((curAuthor, idx) => {
       if (idx !== props.book.authors.length - 1) {
@@ -41,7 +42,7 @@ const Book = (props) => {
   var expandDetails = () => {
     var bookDesc = props.book.description;
     setBookDetails(
-      <div className='expanded-book-details'>
+      <div className='expanded-book-details' onMouseLeave={hideDetails}>
         <ul>
         <li className='descriptors'><u>Title</u></li>
         <div>{props.book.title}</div>
@@ -63,7 +64,7 @@ const Book = (props) => {
     var expandButton = <div></div>
     if (bookDesc && bookDesc.length > 500) {
       bookDesc = props.book.description.slice(0, 500) + '...';
-      expandButton = <button className='expand-button' onClick={expandDetails} onMouseEnter={showDetails} onMouseLeave={hideDetails}>Expand</button>
+      expandButton = <button className='expand-button' onClick={expandDetails} onMouseLeave={hideDetails} onMouseEnter={showDetails}>Expand</button>
     } else if (props.book.authors && props.book.authors.length > 5) {
       expandButton = <button className='expand-button' onMouseEnter={showDetails} onMouseLeave={hideDetails} onClick={expandDetails}>Expand</button>
     }
@@ -90,7 +91,7 @@ const Book = (props) => {
 
   var bookImage = <img className='book-img' src={props.book['img-url']} onMouseEnter={showDetails} onMouseLeave={hideDetails}></img>;
   if (!props.book['img-url']) {
-    bookImage = <div className='book-img' onMouseEnter={showDetails} onMouseLeave={hideDetails}>Title: {props.book.title}</div>;
+    bookImage = <div className='missing-img' onMouseEnter={showDetails} onMouseLeave={hideDetails}>Title <div>{props.book.title}</div></div>;
   }
 
   return (
