@@ -1,2 +1,2 @@
-# mvp
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+# Book Roullete
+A app that displays random books allowing the user to add them to there library. Each book displays its information and link to purchase.
